@@ -22,7 +22,7 @@ class Kynigos
     "Hunt from #{Time.now.strftime("%b. %e, %Y %I:%M%p %Z")}"
   end
 
-  #returns the past 100 listings in the subreddit
+  #return the past 100 listings in the subreddit
   #@params sub => subreddit
   def get_listings sub
     client.get_listing({
@@ -44,6 +44,7 @@ class Kynigos
   end
 
   #search through listings in subreddit for keywords
+  #return listings with keywords
   #@params words => keywords
   #@params sub => subreddit
   def hunt_for words, sub
