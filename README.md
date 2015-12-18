@@ -1,13 +1,17 @@
 #Kynigos
 [![Build Status](https://travis-ci.org/vinnyoodles/kynigos.svg?branch=master)](https://travis-ci.org/vinnyoodles/kynigos)
+[![Code Climate](https://codeclimate.com/github/vinnyoodles/kynigos/badges/gpa.svg)](https://codeclimate.com/github/vinnyoodles/kynigos)
 
 ###Overview
 Explores reddit and subreddits for listings with specific keywords
 
 ###Installation
-Just, clone the repo.
 ```
 $ git clone git@github.com:vinnyoodles/kynigos.git
+```
+This can also be added to Rails applications as a gem.
+```
+$ gem install kynigos
 ```
 
 ###Getting started

@@ -14,8 +14,6 @@ Gem::Specification.new do |spec|
   spec.files         = ["lib/kynigos.rb"]
 
   spec.add_dependency "bundler", "~> 1.10"
-  spec.add_dependency "rake", "~> 10.0"
-  spec.add_dependency "minitest", '~> 4.0'
-  spec.add_dependency "pry", '~> 0'
+  spec.add_dependency "rake", "~> 10.4.2"
   spec.add_dependency "snoo"
 end
