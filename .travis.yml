@@ -1,4 +1,7 @@
 language: ruby
 rvm:
   - 1.9.3
-  - 2.2.1
+env: 
+  global:
+    - secure: ENV["REDDIT_USERNAME"]
+    - secure: ENV["REDDIT_PASSWORD"]
