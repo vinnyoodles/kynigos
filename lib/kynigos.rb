@@ -1,4 +1,5 @@
 require 'snoo'
+require 'pry'
 class Kynigos
 
   attr_reader :username, :password, :client
@@ -49,7 +50,9 @@ class Kynigos
   #@params sub => subreddit
   def hunt_for words, sub
     clean_up_listings(sub).select do |title|
-      title[:title].include?(words.join('|'))
+      title if words.map do |word|
+        title[:title].include?(word)
+      end.include? true
     end
   end
 
@@ -57,7 +60,7 @@ class Kynigos
   #@params keywords => keywords
   #@params sub => subreddit
   def format_body keywords, sub
-    words = [keywords].flatten
+    words = [keywords.map(&:split)].flatten
     hunt_for(words, sub).map do |prize|
       prize[:url]
     end.join("\n")
