@@ -2,6 +2,11 @@ PATH
   remote: .
   specs:
     kynigos (0.0.1)
+      bundler (~> 1.10)
+      minitest (~> 4.0)
+      pry (~> 0)
+      rake (~> 10.0)
+      snoo
 
 GEM
   remote: https://rubygems.org/
@@ -31,12 +36,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (~> 1.10)
   kynigos!
-  minitest (~> 4.0)
-  pry (~> 0)
-  rake (~> 10.0)
-  snoo (~> 0.1.2)
 
 BUNDLED WITH
    1.10.6
