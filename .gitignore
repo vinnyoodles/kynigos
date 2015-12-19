@@ -1,2 +1,5 @@
 .DS_Store
 pkg/
+
+# Ignore application configuration
+/config/application.yml
