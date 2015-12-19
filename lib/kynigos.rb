@@ -1,5 +1,4 @@
 require 'snoo'
-require 'pry'
 class Kynigos
 
   attr_reader :username, :password, :client
