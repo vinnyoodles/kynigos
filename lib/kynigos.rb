@@ -15,7 +15,11 @@ class Kynigos
   #@params keywords => array of words to search for
   #@params sub => subreddit to search in
   def send_prize to, keywords, sub
+    tries ||= 3
     client.send_pm to, title, format_body(keywords, sub)
+  rescue WebserverError => e
+    sleep(10)
+    (tries -= 1).zero? ? raise(e) : retry
   end
 
   def title
@@ -37,8 +41,11 @@ class Kynigos
   def clean_up_listings sub
     get_listings(sub)["data"]["children"].map do |listing|
       {
-        title: listing["data"]["title"],
-        url:   listing["data"]["permalink"]
+        title:   listing["data"]["title"],
+        flair:   listing["data"]["link_flair_text"],
+        text:    listing["data"]["selftext"],
+        thumbs:  listing["data"]["ups"],
+        url:     listing["data"]["permalink"]
       }
     end
   end
@@ -50,7 +57,8 @@ class Kynigos
   def hunt_for words, sub
     clean_up_listings(sub).select do |title|
       title if words.map do |word|
-        title[:title].include?(word)
+        concat = title.values.join(" ")
+        concat.include?(word)
       end.include? true
     end
   end
