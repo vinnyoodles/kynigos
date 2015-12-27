@@ -16,11 +16,7 @@ class Kynigos
   #@params keywords => array of words to search for
   #@params sub => subreddit to search in
   def send_prize to, keywords, sub
-    #tries ||= 3
     message to, title, format_body(keywords, sub) if access_token
-  #rescue WebserverError => e
-    #sleep(10)
-    #(tries -= 1).zero? ? raise(e) : retry
   end
 
   #return title and url of listings in subreddit
