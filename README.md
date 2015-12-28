@@ -15,6 +15,22 @@ This can also be added to Rails applications as a gem.
 $ gem install kynigos
 ```
 
+The application uses Reddit's [OAuth2](https://github.com/reddit/reddit/wiki/OAuth2) for authentication, so you will have to follow the instructions listed in the link to get access. You can also ask me for my authentication keys that I'm currently using.
+
+If you do decide to create your own keys, you will have to save them as environment variables.
+```
+ENV["REDDIT_CLIENT_ID"] = 'p-jcoLKBynTLew'
+ENV["REDDIT_SECRET"] = 'gko_LXELoV07ZBNUXrvWZfzE3aI'
+```
+The keys above are taken from [Reddit's OAuth2 Quick Start Example](https://github.com/reddit/reddit/wiki/OAuth2-Quick-Start-Example)
+
+You will also need to save your reddit username and password as environment variable. This will be the account that will send the private messages
+```
+ENV["REDDIT_USERNAME"] = 'username'
+ENV["REDDIT_PASSWORD"] = 'password'
+```
+
+
 ###Getting started
 First, update `lib/tasks/hunt.rake` to customize your reddit account and subreddit.
 ```
