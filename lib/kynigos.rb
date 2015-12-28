@@ -40,7 +40,7 @@ class Kynigos
   def hunt_for words, sub
     clean_up_listings(sub).select do |title|
       title if title[:thumbs] > 20 ||
-      title if words.map do |word|
+      words.map do |word|
         concat = title.values.join(" ")
         concat.include?(word)
       end.any?
@@ -52,9 +52,10 @@ class Kynigos
   #@params sub => subreddit
   def format_body keywords, sub
     words = [keywords.map(&:split)].flatten
+    previous = sent_messages.map{|x| x["data"]["body"].split("\n")}.flatten.uniq
     hunt_for(words, sub).map do |prize|
-      prize[:url]
-    end.join("\n")
+      prize[:url] unless previous.include?(prize[:url])
+    end.compact.join("\n")
   end
 
   private
@@ -114,6 +115,17 @@ class Kynigos
     @access_token = JSON.parse(response.body)["access_token"]
   end
 
+  def sent_messages
+    uri = URI("#{oauth_uri}/message/sent.json")
+    uri.query = URI.encode_www_form({limit: 10})
+    response = Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+      request = Net::HTTP::Get.new(uri)
+      request['Authorization'] = "bearer #{access_token}"
+      http.request(request)
+    end
+    JSON.parse(response.body)["data"]["children"]
+  end
+
   #return reddits base uri
   def base_uri
     "https://www.reddit.com"
@@ -127,6 +139,4 @@ class Kynigos
   def title
     "Hunt from #{Time.now.strftime("%b. %e, %Y %I:%M%p %Z")}"
   end
-
-
 end
