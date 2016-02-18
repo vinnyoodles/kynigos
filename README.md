@@ -1,7 +1,7 @@
 #Kynigos
 [![Build Status](https://travis-ci.org/vinnyoodles/kynigos.svg?branch=master)](https://travis-ci.org/vinnyoodles/kynigos)
 [![Code Climate](https://codeclimate.com/github/vinnyoodles/kynigos/badges/gpa.svg)](https://codeclimate.com/github/vinnyoodles/kynigos)
-[![Dependency Status](https://www.versioneye.com/user/projects/56749d1e10799700300007dc/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56749d1e10799700300007dc)
+[![Dependency Status](https://www.versioneye.com/user/projects/56c60b9418b271003b3925b1/badge.svg?style=flat)](https://www.versioneye.com/user/projects/56c60b9418b271003b3925b1)
 
 ###Overview
 Explores reddit and subreddits for listings with specific keywords
