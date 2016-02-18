@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     kynigos (0.0.1)
-      rake (~> 10.4.2)
+      rake
 
 GEM
   remote: https://rubygems.org/
