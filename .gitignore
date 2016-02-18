@@ -3,3 +3,5 @@ pkg/
 
 # Ignore application configuration
 /config/application.yml
+
+kynigos-1.0.0.gem
