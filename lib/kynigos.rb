@@ -28,6 +28,7 @@ class Kynigos
         flair:   listing["data"]["link_flair_text"],
         text:    listing["data"]["selftext"],
         thumbs:  listing["data"]["ups"],
+        link:    listing["data"]["url"],
         url:     listing["data"]["permalink"]
       }
     end
