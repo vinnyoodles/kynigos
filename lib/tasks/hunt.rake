@@ -8,17 +8,17 @@ task :setup do
 end
 
 task :weightlifting => :setup do 
-  @client.send_prize 'vinnyoodles', @keywords['weightlifting'], 'weightlifting'
+  @client.send_full_prize 'vinnyoodles', @keywords['weightlifting'], 'weightlifting'
 end
 
 task :shokugeki => :setup do 
-  @client.send_prize 'vinnyoodles', @keywords['shokugekinosouma'], 'shokugekinosouma'
+  @client.send_reduced_prize 'vinnyoodles', @keywords['shokugekinosouma'], 'shokugekinosouma'
 end
 
 task :onepiece => :setup do
-  @client.send_prize 'vinnyoodles', @keywords['onepiece'], 'onepiece'
+  @client.send_reduced_prize 'vinnyoodles', @keywords['onepiece'], 'onepiece'
 end
 
-task :toriko => :setup do
-  @client.send_prize 'vinnyoodles', @keywords['toriko'], 'toriko'
+task :bleach => :setup do
+  @client.send_reduced_prize 'vinnyoodles', @keywords['bleach'], 'bleach'
 end

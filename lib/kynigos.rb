@@ -1,5 +1,6 @@
 require 'net/http'
 require 'json'
+require 'pry'
 class Kynigos
 
   attr_reader :username, :password, :modhash, :access_token
@@ -15,8 +16,12 @@ class Kynigos
   #@params to => reddit user
   #@params keywords => array of words to search for
   #@params sub => subreddit to search in
-  def send_prize to, keywords, sub
-    message to, title, format_body(keywords, sub) if access_token
+  def send_full_prize to, keywords, sub
+    message to, title, format_full_body(keywords, sub) if access_token
+  end
+
+  def send_reduced_prize to, keywords, sub
+    message to, title, format_reduced_body(keywords, sub) if access_token
   end
 
   #return title and url of listings in subreddit
@@ -34,13 +39,21 @@ class Kynigos
     end
   end
 
+  #return popular listings
+  #@params words => keywords
+  #@params sub => subreddit
+  def find_popular sub
+    clean_up_listings(sub).select do |title|
+      title if title[:thumbs] > 20
+    end
+  end
+
   #search through listings in subreddit for keywords
   #return listings with keywords
   #@params words => keywords
   #@params sub => subreddit
   def hunt_for words, sub
     clean_up_listings(sub).select do |title|
-      title if title[:thumbs] > 20 ||
       words.map do |word|
         concat = title.values.join(" ")
         concat.include?(word)
@@ -48,15 +61,30 @@ class Kynigos
     end
   end
 
-  #return urls of listings after search
+  #return urls of only listings with keywords  
   #@params keywords => keywords
   #@params sub => subreddit
-  def format_body keywords, sub
+  def format_reduced_body keywords, sub
     words = [keywords.map(&:split)].flatten
     previous = sent_messages.map{|x| x["data"]["body"].split("\n")}.flatten.uniq
     hunt_for(words, sub).map do |prize|
       prize[:url] unless previous.include?(prize[:url])
     end.compact.join("\n")
+  end
+
+  #return urls of all searched listings
+  #@params keywords => keywords
+  #@params sub => subreddit
+  def format_full_body keywords, sub
+    words = [keywords.map(&:split)].flatten
+    previous = sent_messages.map{|x| x["data"]["body"].split("\n")}.flatten.uniq
+    searched = hunt_for(words, sub).map do |prize|
+      prize[:url] unless previous.include?(prize[:url])
+    end.compact.join("\n")
+    popular =  find_popular(sub).map do |prize|
+      prize[:url] unless previous.include?(prize[:url])
+    end.compact.join("\n")
+    [searched, popular].compact.join("\n")
   end
 
   private
@@ -141,3 +169,4 @@ class Kynigos
     "Hunt from #{Time.now.strftime("%b. %e, %Y %I:%M%p %Z")}"
   end
 end
+binding.pry
