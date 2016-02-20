@@ -1,6 +1,5 @@
 require 'net/http'
 require 'json'
-require 'pry'
 class Kynigos
 
   attr_reader :username, :password, :modhash, :access_token
@@ -67,7 +66,7 @@ class Kynigos
   def format_reduced_body keywords, sub
     previous = sent_messages.map{|x| x["data"]["body"].split("\n")}.flatten.uniq
     hunt_for(keywords, sub).map do |prize|
-      prize[:url] #unless previous.include?(prize[:url])
+      prize[:url] unless previous.include?(prize[:url])
     end.compact.join("\n")
   end
 
