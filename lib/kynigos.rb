@@ -53,7 +53,7 @@ class Kynigos
   #@params words => keywords
   #@params sub => subreddit
   def hunt_for words, sub
-    clean_up_listings(sub).select do |title|
+     clean_up_listings(sub).select do |title|
       words.map do |word|
         concat = title.values.join(" ")
         concat.include?(word)
@@ -65,10 +65,9 @@ class Kynigos
   #@params keywords => keywords
   #@params sub => subreddit
   def format_reduced_body keywords, sub
-    words = [keywords.map(&:split)].flatten
     previous = sent_messages.map{|x| x["data"]["body"].split("\n")}.flatten.uniq
-    hunt_for(words, sub).map do |prize|
-      prize[:url] unless previous.include?(prize[:url])
+    hunt_for(keywords, sub).map do |prize|
+      prize[:url] #unless previous.include?(prize[:url])
     end.compact.join("\n")
   end
 
@@ -169,4 +168,3 @@ class Kynigos
     "Hunt from #{Time.now.strftime("%b. %e, %Y %I:%M%p %Z")}"
   end
 end
-binding.pry
